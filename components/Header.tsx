@@ -3,7 +3,7 @@ import Link from "next/link";
 import LeftBracket from "next/image";
 import RightBracket from "next/image";
 import { useState } from "react";
-import { useGlobalUI } from "@/app/context/GlobalUiContext";
+import { useGlobalUI } from "@/app/context/GlobalUIContext";
 
 export default function Header() {
   const { hideEnterCode } = useGlobalUI();

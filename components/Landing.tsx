@@ -6,7 +6,7 @@ import RightDiamond from "next/image";
 import LeftDiamond from "next/image";
 import LeftArrow from "next/image";
 import RightArrow from "next/image";
-import { useGlobalUI } from "@/app/context/GlobalUiContext";
+import { useGlobalUI } from "@/app/context/GlobalUIContext";
 
 export default function Landing() {
   const { setHideEnterCode } = useGlobalUI();
