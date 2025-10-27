@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Roboto } from "next/font/google";
-import localFont from "next/font/local";
+
 import "./globals.css";
 import { GlobalUIProvider } from "@/app/context/GlobalUIContext";
+import { NameAndLocateProvider } from "./context/NameAndLocateContext";
+import { LoadingProvider } from "./context/LoadingContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +34,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} antialiased`}>
-        <GlobalUIProvider>{children}</GlobalUIProvider>
+        <LoadingProvider>
+          <NameAndLocateProvider>
+            <GlobalUIProvider>{children}</GlobalUIProvider>
+          </NameAndLocateProvider>
+        </LoadingProvider>
       </body>
     </html>
   );

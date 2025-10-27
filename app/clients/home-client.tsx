@@ -12,7 +12,7 @@ export default function HomeClient() {
     <>
       <Header  />
       <Landing  />
-      <Base />
+      
     </>
   );
 }

@@ -1,4 +1,6 @@
 "use client";
+// context are used to share state between components without prop drilling. 
+// Here the context is used to share the hideEnterCode state between Header and Landing components.
 
 import { createContext, useContext, useState, ReactNode } from "react";
 

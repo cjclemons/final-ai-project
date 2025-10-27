@@ -1,6 +1,30 @@
+"use client";
+import { useNameAndLocate } from "@/app/context/NameAndLocateContext";
+import { useState } from "react";
+
 export default function Name() {
+  const { setEnteredName } = useNameAndLocate();
+  const [tempName, setTempName] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTempName(e.target.value);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (tempName.trim() !== "") {
+        setEnteredName(tempName); // ✅ only update context when Enter is pressed
+      }
+      console.log(tempName);
+    }
+  };
+
   return (
     <>
+      <p className="text-sm text-gray-400 tracking-wider uppercase mb-1">
+        CLICK TO TYPE
+      </p>
       <form
         action="javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you\'re trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"
         className="relative z-10"
@@ -12,6 +36,9 @@ export default function Name() {
           autoComplete="off"
           type="text"
           name="name"
+          value={tempName}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
         <button type="submit" className="sr-only">
           Submit
