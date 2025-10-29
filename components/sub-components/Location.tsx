@@ -5,12 +5,15 @@ import { useLoading } from "@/app/context/LoadingContext";
 import { PhaseOneDataHandling } from "@/app/data-handling/PhaseOneDataHandling";
 import TestLoading from "./TestLoading";
 import ThankYou from "./ThankYou";
+import { useThankYou } from "@/app/context/ThankYouContext";
+
 export default function Location() {
   const { setEnteredLocation, enteredLocation, enteredName } =
     useNameAndLocate();
   const [tempLocation, setTempLocation] = useState("");
   const { isLoading, setIsLoading } = useLoading();
   const [isComplete, setIsComplete] = useState(false);
+  const {setThankYouShown}=useThankYou()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTempLocation(e.target.value);
@@ -24,6 +27,7 @@ export default function Location() {
           setEnteredLocation(tempLocation); // ✅ only update context when Enter is pressed
           await PhaseOneDataHandling(enteredName, tempLocation);
           setIsComplete(true);
+          setThankYouShown(true)
         } catch (error) {
           console.error("Error sending data:", error);
         } finally {

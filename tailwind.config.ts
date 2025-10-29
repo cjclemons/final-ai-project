@@ -1,12 +1,17 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       animation: {
-        spinSlow: "spin 3s linear infinite",
-        spinSlower: "spin 5s linear infinite",
-        spinSlowest: "spin 85s linear infinite",
+        "spin-slow": "spin 3s linear infinite",
+        "spin-slower": "spin 5s linear infinite",
+        "spin-slowest": "spin 85s linear infinite",
       },
     },
   },

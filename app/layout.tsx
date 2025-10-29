@@ -5,6 +5,9 @@ import "./globals.css";
 import { GlobalUIProvider } from "@/app/context/GlobalUIContext";
 import { NameAndLocateProvider } from "./context/NameAndLocateContext";
 import { LoadingProvider } from "./context/LoadingContext";
+import { ImageProvider } from "./context/ImageContext";
+import { ThankYouProvider } from "./context/ThankYouContext";
+import { CategoryProvider } from "./context/CategoryContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,11 +37,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} antialiased`}>
-        <LoadingProvider>
-          <NameAndLocateProvider>
-            <GlobalUIProvider>{children}</GlobalUIProvider>
-          </NameAndLocateProvider>
-        </LoadingProvider>
+        <CategoryProvider>
+          <ThankYouProvider>
+            <ImageProvider>
+              <LoadingProvider>
+                <NameAndLocateProvider>
+                  <GlobalUIProvider>{children}</GlobalUIProvider>
+                </NameAndLocateProvider>
+              </LoadingProvider>
+            </ImageProvider>
+          </ThankYouProvider>
+        </CategoryProvider>
       </body>
     </html>
   );
