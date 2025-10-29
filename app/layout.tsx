@@ -8,6 +8,8 @@ import { LoadingProvider } from "./context/LoadingContext";
 import { ImageProvider } from "./context/ImageContext";
 import { ThankYouProvider } from "./context/ThankYouContext";
 import { CategoryProvider } from "./context/CategoryContext";
+import { PictureDataProvider } from "./context/PictureDataContext";
+import { ChosenStatProvider } from "./context/ChosenStatContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,17 +39,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} antialiased`}>
-        <CategoryProvider>
-          <ThankYouProvider>
-            <ImageProvider>
-              <LoadingProvider>
-                <NameAndLocateProvider>
-                  <GlobalUIProvider>{children}</GlobalUIProvider>
-                </NameAndLocateProvider>
-              </LoadingProvider>
-            </ImageProvider>
-          </ThankYouProvider>
-        </CategoryProvider>
+        <ChosenStatProvider>
+          <PictureDataProvider>
+            <CategoryProvider>
+              <ThankYouProvider>
+                <ImageProvider>
+                  <LoadingProvider>
+                    <NameAndLocateProvider>
+                      <GlobalUIProvider>{children}</GlobalUIProvider>
+                    </NameAndLocateProvider>
+                  </LoadingProvider>
+                </ImageProvider>
+              </ThankYouProvider>
+            </CategoryProvider>
+          </PictureDataProvider>
+        </ChosenStatProvider>
       </body>
     </html>
   );

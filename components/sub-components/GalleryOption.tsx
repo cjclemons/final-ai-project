@@ -4,13 +4,15 @@ import DiamondMedium from "next/image";
 import DiamondSmall from "next/image";
 import GalleryIcon from "next/image";
 import GalleryLine from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { PhaseTwoDataHandling } from "@/app/data-handling/PhaseTwoDataHandling";
 import { useImage } from "@/app/context/ImageContext";
+import { usePictureData } from "../../app/context/PictureDataContext";
 
 export default function GalleryOption() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const {setPreview}=useImage()
+  const { setPreview } = useImage();
+  const { pictureData, setPictureData } = usePictureData();
 
   // Trigger the file picker
   const handleGalleryClick = () => {
@@ -21,17 +23,25 @@ export default function GalleryOption() {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    
-    
+
     const reader = new FileReader();
     reader.onloadend = async () => {
-        const base64String = reader.result as string;
-        console.log("✅ Base64 Image:", base64String);
-        setPreview(base64String); // 🧠 shared globally
-        await PhaseTwoDataHandling(base64String);
+      const base64String = reader.result as string;
+      console.log("✅ Base64 Image:", base64String);
+      setPreview(base64String); // 🧠 shared globally
+      const response = await PhaseTwoDataHandling(base64String);
+      const data=response.data
+
+      console.log(data.age);
+      setPictureData(data)
+      
     };
     reader.readAsDataURL(file); // convert file → Base64
   };
+
+  useEffect(() => {
+  console.log("📸 pictureData updated:", pictureData);
+}, [pictureData]);
 
   return (
     <>

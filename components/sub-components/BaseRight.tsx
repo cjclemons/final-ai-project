@@ -56,7 +56,7 @@ export default function BaseRight() {
   // The Confirm will document the info of the user and either
   // lead to a thank you for using the AI app, or just back to the home page.
 
-  if (pathname === "select") {
+  if (pathname==='/select' && chosenCategory) {
     return (
       <>
         {" "}
@@ -80,13 +80,13 @@ export default function BaseRight() {
     );
   }
 
-  if (pathname === "summary") {
+  if (pathname === "/summary") {
     return (
       <>
         {showProceed ? (
           <div className="flex items-center justify-between">
             <Link className="inset-0" aria-label="Reset App" href={proceedHref}>
-              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold  transition-colors  disabled:pointer-events-none text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 mx-4 scale-[0.8] text-[#FCFCFC] text-[10px] bg-[#ffff] leading-[16px] ">
+              <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold  transition-colors  disabled:pointer-events-none text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 mx-4 scale-[0.8] text-[#1A1B1C] text-[10px] bg-[#ffff] leading-[16px] ">
                 RESET
               </button>
             </Link>

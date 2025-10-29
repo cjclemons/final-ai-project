@@ -2,10 +2,13 @@
 import DiamondLarge from "next/image";
 import DiamondMedium from "next/image";
 import DiamondSmall from "next/image";
+import Link from "next/link";
 import { useState } from "react";
+import { useCategory } from "@/app/context/CategoryContext";
 
 export default function SelectCategory() {
   const [hovered, setHovered] = useState(false);
+  const { setChosenCategory } = useCategory();
   return (
     <>
       <div className="absolute top-10 left-8 text-left mt-5">
@@ -20,6 +23,29 @@ export default function SelectCategory() {
       </div>
       <div className="h-[78.3vh] flex flex-col items-center justify-center bg-white">
         <div className="relative">
+          <div className="relative demo-wrapper">
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="hover-diamond-small absolute transition-all duration-400">
+                <DiamondSmall
+                  src="/assets/diamond-small.svg"
+                  alt="Diamond Small"
+                  width={408}
+                  height={408}
+                  loading="lazy"
+                  sizes="100vw"
+                  className="object-contain"
+                  style={{
+                    position: "absolute",
+                    height: "100%",
+                    width: "100%",
+                    inset: "0px",
+                    objectFit: "contain",
+                    color: "transparent",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div
               className={`absolute transition-all duration-400 ${
@@ -28,27 +54,6 @@ export default function SelectCategory() {
                   : "opacity-0 w-[400px] h-[400px]"
               }`}
             >
-              <DiamondSmall
-                src="/assets/diamond-small.svg"
-                alt="Diamond Small"
-                width={408}
-                height={408}
-                loading="lazy"
-                sizes="100vw"
-                className="object-contain"
-                style={{
-                  position: "absolute",
-                  height: "100%",
-                  width: "100%",
-                  inset: "0px",
-                  objectFit: "contain",
-                  color: "transparent",
-                }}
-              />
-            </div>
-          </div>
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="absolute transition-all duration-400 w-[400px] h-[400px] opacity-0">
               <DiamondMedium
                 src="/assets/diamond-medium.svg"
                 alt="Diamond Medium"
@@ -68,7 +73,13 @@ export default function SelectCategory() {
             </div>
           </div>
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="absolute transition-all duration-400 w-[400px] h-[400px] opacity-0">
+            <div
+              className={`absolute transition-all duration-400 ${
+                hovered
+                  ? "opacity-100 w-[602px] h-[602px]"
+                  : "opacity-0 w-[400px] h-[400px]"
+              }`}
+            >
               <DiamondLarge
                 src="/assets/diamond-large.svg"
                 alt="Diamond Large"
@@ -89,15 +100,12 @@ export default function SelectCategory() {
           </div>
           <div className="relative z-10 grid grid-cols-3 grid-rows-3 gap-0">
             <div className="flex items-center justify-center col-start-2">
-              <a href="/summary">
-                <button
-                  onMouseEnter={() => setHovered(true)}
-                  onMouseLeave={() => setHovered(false)}
-                  className="w-[153.88px] h-[153.88px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 cursor-pointer font-semibold leading-[24px] tracking-tight uppercase hover:scale-105 transition-transform duration-300 hover--demo"
-                >
-                  <span className="transform -rotate-45">Demographics</span>
-                </button>
-              </a>
+              <button
+                onClick={() => setChosenCategory(true)}
+                className=" demo-wrapper w-[153.88px] h-[153.88px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 cursor-pointer font-semibold leading-[24px] tracking-tight uppercase hover:scale-105 transition-transform duration-300 hover--demo"
+              >
+                <span className="transform -rotate-45">Demographics</span>
+              </button>
             </div>
             <div className="flex items-center justify-center row-start-2 col-start-1">
               <button className="w-[153.88px] h-[153.88px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed">
