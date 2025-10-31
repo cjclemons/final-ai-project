@@ -1,15 +1,17 @@
-'use client'
+"use client";
 import { useContext, createContext, useState, ReactNode } from "react";
 
+export type StatTitle= 'RACE' | 'AGE'| 'GENDER'
+
 type ChosenStatContextType = {
-  aiStatTitle: string | null;
-  setAiStatTitle: (value: string | null) => void;
+  aiStatTitle: StatTitle;
+  setAiStatTitle: (value: StatTitle) => void;
 };
 
 const ChosenStatContext = createContext<ChosenStatContextType | null>(null);
 
 export function ChosenStatProvider({ children }: { children: ReactNode }) {
-  const [aiStatTitle, setAiStatTitle] = useState<string | null>(null);
+  const [aiStatTitle, setAiStatTitle] = useState<StatTitle>('RACE');
 
   return (
     <ChosenStatContext.Provider value={{ aiStatTitle, setAiStatTitle }}>
@@ -19,7 +21,7 @@ export function ChosenStatProvider({ children }: { children: ReactNode }) {
 }
 
 export function useChosenStat() {
-    const context=useContext(ChosenStatContext)
-    if (!context) throw new Error('')
-        return context
+  const context = useContext(ChosenStatContext);
+  if (!context) throw new Error("");
+  return context;
 }

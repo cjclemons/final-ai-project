@@ -2,11 +2,21 @@
 import Link from "next/link";
 import LeftBracket from "next/image";
 import RightBracket from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalUI } from "@/app/context/GlobalUIContext";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const { hideEnterCode } = useGlobalUI();
+  const pathname = usePathname();
+  const [showAnalysis, setAnalysis] = useState(false);
+  useEffect(() => {
+    if (pathname === "/select" || pathname === "/summary") {
+      setAnalysis(true);
+    } else {
+      setAnalysis(false);
+    }
+  }, [pathname]); 
 
   return (
     <>
@@ -23,16 +33,23 @@ export default function Header() {
             alt="left bracket"
             width={4}
             height={17}
+            className="w-[4px] h-[17px]"
           />
-
-          <p className="text-[#1a1b1c83] text-opacity-70  font-semibold text-sm ml-1.5 mr-1.5">
-            INTRO
-          </p>
+          {showAnalysis ? (
+            <p className="text-[#1a1b1c83] text-opacity-70  font-semibold text-sm ml-1.5 mr-1.5">
+              ANALYSIS
+            </p>
+          ) : (
+            <p className="text-[#1a1b1c83] text-opacity-70  font-semibold text-sm ml-1.5 mr-1.5">
+              INTRO
+            </p>
+          )}
           <RightBracket
             src="/assets/bracket-right.svg"
             alt="right bracket"
             width={4}
             height={17}
+            className="w-[4px] h-[17px]"
           />
         </div>
         {!hideEnterCode && (

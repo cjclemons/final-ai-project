@@ -7,9 +7,11 @@ import {
   useEffect,
 } from "react";
 
+type DataTitle = Record<string, any>
+
 type PictureDataContextType = {
-  pictureData: Object | null;
-  setPictureData: (value: Object | null) => void;
+  pictureData: DataTitle | null;
+  setPictureData: (value: DataTitle | null) => void;
 };
 
 const PictureDataContext = createContext<PictureDataContextType | undefined>(
@@ -17,7 +19,7 @@ const PictureDataContext = createContext<PictureDataContextType | undefined>(
 );
 
 export function PictureDataProvider({ children }: { children: ReactNode }) {
-  const [pictureData, setPictureData] = useState<Object | null>(null);
+  const [pictureData, setPictureData] = useState<DataTitle | null>(null);
 
   // 🔹 Load from localStorage on mount
   useEffect(() => {
