@@ -1,17 +1,22 @@
-"use client"
+"use client";
 import { createContext, useState, useContext, ReactNode } from "react";
 
 type ImageContextType = {
   preview: string | null;
   setPreview: (img: string | null) => void;
+  clickedCamera: boolean;
+  setClickedCamera: (value: boolean) => void;
 };
 
 const ImageContext = createContext<ImageContextType | undefined>(undefined);
 
 export function ImageProvider({ children }: { children: ReactNode }) {
   const [preview, setPreview] = useState<string | null>(null);
+  const [clickedCamera, setClickedCamera] = useState(false);
   return (
-    <ImageContext.Provider value={{ preview, setPreview }}>
+    <ImageContext.Provider
+      value={{ preview, setPreview, clickedCamera, setClickedCamera }}
+    >
       {children}
     </ImageContext.Provider>
   );

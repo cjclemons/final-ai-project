@@ -6,6 +6,7 @@ import { useImage } from "@/app/context/ImageContext";
 import { useNameAndLocate } from "@/app/context/NameAndLocateContext";
 import { useCategory } from "@/app/context/CategoryContext";
 import { useThankYou } from "@/app/context/ThankYouContext";
+import { useEffect } from "react";
 
 export default function BaseRight() {
   const pathname = usePathname();
@@ -15,6 +16,8 @@ export default function BaseRight() {
   // this will lead to select if a truthy
   const { chosenCategory } = useCategory();
   const { thankYouShown } = useThankYou();
+
+
 
   // --- Logic for dynamic visibility + destination ---
   let showProceed = false;

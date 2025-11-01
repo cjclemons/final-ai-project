@@ -29,75 +29,6 @@
   animation: spin 15s linear infinite;
 }
 
-/* @media (hover: hover) {
-        .group-hover\:scale-105:is(:where(.group):hover *) {
-            --tw-scale-x:105%;
-            --tw-scale-y: 105%;
-            --tw-scale-z: 105%;
-            scale: var(--tw-scale-x)var(--tw-scale-y)
-        }
-
-        .group-hover\:scale-110:is(:where(.group):hover *) {
-            --tw-scale-x: 110%;
-            --tw-scale-y: 110%;
-            --tw-scale-z: 110%;
-            scale: var(--tw-scale-x)var(--tw-scale-y)
-        }
-
-        .group-hover\:scale-\[0\.92\]:is(:where(.group):hover *) {
-            scale: .92
-        }
-
-        .hover\:scale-60:hover {
-            --tw-scale-x: 60%;
-            --tw-scale-y: 60%;
-            --tw-scale-z: 60%;
-            scale: var(--tw-scale-x)var(--tw-scale-y)
-        }
-
-        .hover\:scale-105:hover {
-            --tw-scale-x: 105%;
-            --tw-scale-y: 105%;
-            --tw-scale-z: 105%;
-            scale: var(--tw-scale-x)var(--tw-scale-y)
-        }
-
-        .hover\:scale-108:hover {
-            --tw-scale-x: 108%;
-            --tw-scale-y: 108%;
-            --tw-scale-z: 108%;
-            scale: var(--tw-scale-x)var(--tw-scale-y)
-        }
-
-        .hover\:scale-\[1\.05\]:hover {
-            scale: 1.05
-        }
-
-        .hover\:bg-\[\#E1E1E2\]:hover {
-            background-color: #e1e1e2
-        }
-
-        .hover\:bg-black:hover {
-            background-color: var(--color-black)
-        }
-
-        .hover\:bg-gray-300:hover {
-            background-color: var(--color-gray-300)
-        }
-
-        .hover\:bg-gray-800:hover {
-            background-color: var(--color-gray-800)
-        }
-
-        .hover\:text-gray-300:hover {
-            color: var(--color-gray-300)
-        }
-
-        .hover\:text-gray-500:hover {
-            color: var(--color-gray-500)
-        }
-    } */
-
 .hover-diamond-small {
   width: 400px;
   height: 400px;
@@ -121,4 +52,19 @@
 .CircularProgressbar-trail {
   stroke: #d6d6d6;
   stroke-linecap: round;
+}
+
+@keyframes fade-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%); /* start slightly left */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* end in normal position */
+  }
+}
+
+.base-right {
+  animation: fade-slide-in 700ms ease-out forwards;
 }

@@ -1,7 +1,4 @@
-
-
 export async function PhaseTwoDataHandling(base64Image: string) {
-  
   try {
     const res = await fetch(
       "https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseTwo",
@@ -16,7 +13,7 @@ export async function PhaseTwoDataHandling(base64Image: string) {
 
     const data = await res.json();
     console.log("✅ API Response:", data);
-    return data
+    return data;
   } catch (error) {
     console.error("❌ Error uploading image:", error);
   }

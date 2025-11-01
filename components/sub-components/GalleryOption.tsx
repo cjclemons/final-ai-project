@@ -11,7 +11,7 @@ import { usePictureData } from "../../app/context/PictureDataContext";
 
 export default function GalleryOption() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const { setPreview } = useImage();
+  const { setPreview, clickedCamera } = useImage();
   const { pictureData, setPictureData } = usePictureData();
 
   // Trigger the file picker
