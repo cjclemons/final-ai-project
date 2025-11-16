@@ -99,16 +99,16 @@ export default function SelectCategory() {
             </div>
           </div>
           <div className="relative z-10 grid grid-cols-3 grid-rows-3 gap-0">
-            <Link href="/select">
             <div className="flex items-center justify-center col-start-2">
-              <button
-                onClick={() => setChosenCategory(true)}
-                className=" demo-wrapper w-[153.88px] h-[153.88px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 cursor-pointer font-semibold leading-[24px] tracking-tight uppercase hover:scale-105 transition-transform duration-300 hover--demo"
+              <Link href="/summary">
+                <button
+                  onClick={() => setChosenCategory(true)}
+                  className=" demo-wrapper w-[153.88px] h-[153.88px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 cursor-pointer font-semibold leading-[24px] tracking-tight uppercase hover:scale-105 transition-transform duration-300 hover--demo"
                 >
-                <span className="transform -rotate-45">Demographics</span>
-              </button>
+                  <span className="transform -rotate-45">Demographics</span>
+                </button>
+              </Link>
             </div>
-                </Link>
             <div className="flex items-center justify-center row-start-2 col-start-1">
               <button className="w-[153.88px] h-[153.88px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed">
                 <span className="transform -rotate-45">Cosmetic Concerns</span>
