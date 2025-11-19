@@ -6,7 +6,6 @@ import { useImage } from "@/app/context/ImageContext";
 import { useNameAndLocate } from "@/app/context/NameAndLocateContext";
 import { useCategory } from "@/app/context/CategoryContext";
 import { useThankYou } from "@/app/context/ThankYouContext";
-import { useEffect } from "react";
 
 export default function BaseRight() {
   const pathname = usePathname();
@@ -16,8 +15,6 @@ export default function BaseRight() {
   // this will lead to select if a truthy
   const { chosenCategory } = useCategory();
   const { thankYouShown } = useThankYou();
-
-
 
   // --- Logic for dynamic visibility + destination ---
   let showProceed = false;
@@ -59,12 +56,21 @@ export default function BaseRight() {
   // The Confirm will document the info of the user and either
   // lead to a thank you for using the AI app, or just back to the home page.
 
-  if (pathname==='/select' && chosenCategory) {
+  if (pathname === "/select" && chosenCategory) {
     return (
       <>
         {" "}
         {showProceed ? (
           <Link className="inset-0" aria-label="To Summary" href={proceedHref}>
+            <div className="scale-[1.75] sm:hidden">
+              <BackArrow
+                className="scale-[0.85] rotate-180 group-hover:scale-[0.92] ease duration-300"
+                src="/assets/arrow-back.svg"
+                alt="Back Arrow"
+                width={44}
+                height={44}
+              />
+            </div>
             <div className="group hidden sm:flex flex-row relative justify-center items-center">
               <span className="text-sm font-semibold hidden sm:block mr-5 ">
                 GET SUMMARY
@@ -112,6 +118,15 @@ export default function BaseRight() {
     <>
       {showProceed ? (
         <Link className="inset-0" aria-label="Proceed" href={proceedHref}>
+          <div className="scale-[1.75] sm:hidden">
+            <BackArrow
+              className="scale-[0.85] rotate-180 group-hover:scale-[0.92] ease duration-300"
+              src="/assets/arrow-back.svg"
+              alt="Back Arrow"
+              width={44}
+              height={44}
+            />
+          </div>
           <div className="group hidden sm:flex flex-row relative justify-center items-center">
             <span className="text-sm font-semibold hidden sm:block mr-5 ">
               PROCEED

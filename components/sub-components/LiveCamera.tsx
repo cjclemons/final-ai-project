@@ -8,17 +8,22 @@ import { PhaseTwoDataHandling } from "@/app/data-handling/PhaseTwoDataHandling";
 import { useImage } from "@/app/context/ImageContext";
 import { usePictureData } from "@/app/context/PictureDataContext";
 import Base from "../Base";
+import { useLoading } from "@/app/context/LoadingContext";
+import ResultsLoading from "./ResultsLoading";
 
-export default function LiveCamera({onCameraReady}:{onCameraReady:()=>void}) {
+export default function LiveCamera({
+  onCameraReady,
+}: {
+  onCameraReady: () => void;
+}) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
   const [isLoadingCamera, setIsLoadingCamera] = useState(true);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-
-  const { setPreview } = useImage();
+  const { setPreview, clickedCamera } = useImage();
   const { setPictureData } = usePictureData();
+  const { isLoading, setIsLoading } = useLoading();
   const router = useRouter();
 
   // ✅ Start Camera on Page Load
@@ -31,27 +36,19 @@ export default function LiveCamera({onCameraReady}:{onCameraReady:()=>void}) {
 
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
-
           videoRef.current.onloadedmetadata = () => {
-            setIsLoadingCamera(false)
+            videoRef.current?.play();
+            setIsLoadingCamera(false);
             onCameraReady();
           };
         }
       } catch (error) {
         alert("Camera access denied.");
-        router.push("/"); // send user back if blocked
+        router.push("/");
       }
     };
 
     startCamera();
-
-    // ✅ Stop camera on unmount
-    return () => {
-      if (videoRef.current?.srcObject) {
-        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
-        tracks.forEach((track) => track.stop());
-      }
-    };
   }, []);
 
   // ✅ Capture the photo
@@ -75,19 +72,26 @@ export default function LiveCamera({onCameraReady}:{onCameraReady:()=>void}) {
 
   // ✅ Submit image to API
   const usePhoto = async () => {
-    if (!previewImage) return;
+  if (!previewImage) return;
 
-    setIsAnalyzing(true);
+  setIsAnalyzing(true);
+  setPreview(previewImage);
+  setIsLoading(true); // ✅ Start loading BEFORE the API call
 
-    setPreview(previewImage);
-
+  try {
     const response = await PhaseTwoDataHandling(previewImage);
     const data = response.data;
 
     setPictureData(data);
+  } finally {
+    setIsLoading(false); // ends loading when finished
+  }
+};
 
-    router.push("/select");
-  };
+  if (isLoading) {
+    return <ResultsLoading />;
+  }
+
   return (
     <>
       <div className="h-[90vh] w-screen">
@@ -168,7 +172,7 @@ export default function LiveCamera({onCameraReady}:{onCameraReady:()=>void}) {
           )}
 
           <div className="absolute md:bottom-8 bottom-60 left-8 z-20 text-[#fff]">
-            <Base/>
+            <Base />
           </div>
           <canvas ref={canvasRef} className="hidden"></canvas>
           {isAnalyzing && (
