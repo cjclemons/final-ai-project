@@ -34,6 +34,13 @@ export default function BaseRight() {
     proceedHref = "/select";
   }
 
+  if (pathname === "/camera" && preview) {
+    // WILL HAVE PROCEED
+
+    showProceed = true;
+    proceedHref = "/select";
+  }
+
   if (pathname === "/select" && chosenCategory) {
     // Show GET SUMMARY
     // category clicked

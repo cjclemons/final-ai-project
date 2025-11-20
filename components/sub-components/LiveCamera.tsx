@@ -88,10 +88,7 @@ export default function LiveCamera({
   }
 };
 
-  if (isLoading) {
-    return <ResultsLoading />;
-  }
-
+ {isLoading && <ResultsLoading />}
   return (
     <>
       <div className="h-[90vh] w-screen">
