@@ -72,24 +72,27 @@ export default function LiveCamera({
 
   // ✅ Submit image to API
   const usePhoto = async () => {
-  if (!previewImage) return;
+    if (!previewImage) return;
 
-  setIsAnalyzing(true);
-  setPreview(previewImage);
-  setIsLoading(true); // ✅ Start loading BEFORE the API call
+    setIsAnalyzing(true);
+    setPreview(previewImage);
+    setIsLoading(true); // ✅ Start loading BEFORE the API call
 
-  try {
-    const response = await PhaseTwoDataHandling(previewImage);
-    const data = response.data;
+    try {
+      const response = await PhaseTwoDataHandling(previewImage);
+      const data = response.data;
 
-    setPictureData(data);
-  } finally {
-    setIsLoading(false); // ends loading when finished
-    setIsAnalyzing(false)
+      setPictureData(data);
+    } finally {
+      setIsLoading(false); // ends loading when finished
+      setIsAnalyzing(false);
+      router.push("/select");
+    }
+  };
+
+  {
+    isLoading && <ResultsLoading />;
   }
-};
-
- {isLoading && <ResultsLoading />}
   return (
     <>
       <div className="h-[90vh] w-screen">
