@@ -85,6 +85,7 @@ export default function LiveCamera({
     setPictureData(data);
   } finally {
     setIsLoading(false); // ends loading when finished
+    setIsAnalyzing(false)
   }
 };
 
